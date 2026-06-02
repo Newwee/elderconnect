@@ -966,3 +966,93 @@ body.dark-mode .game-card.game-matched .game-card-picture {
         gap: 8px;
     }
 }
+
+
+/* ===== PATCH MOBILE: แก้เมนู/โหมดสายตาบังหน้าจอโทรศัพท์ ===== */
+@media (max-width: 760px) {
+    .navbar {
+        position: relative !important;   /* เดิม sticky ทำให้เมนูบังหน้าจอ */
+        top: auto !important;
+        z-index: 10 !important;
+        padding: 14px 4% !important;
+        gap: 12px !important;
+    }
+
+    .logo {
+        justify-content: center;
+        width: 100%;
+        font-size: 1.55rem;
+    }
+
+    .brand-logo-img {
+        height: 54px;
+        max-width: 54px;
+        object-fit: contain;
+    }
+
+    .nav-links {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        gap: 10px;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .nav-links a {
+        min-height: 58px;
+        padding: 10px 8px;
+        font-size: 1.05rem;
+        text-align: center;
+        justify-content: center;
+        border-radius: 18px;
+    }
+
+    .nav-actions {
+        position: static !important;     /* กันไม่ให้กล่องโหมดสายตาลอยทับ */
+        width: 100%;
+        display: block;
+        background: transparent;
+        box-shadow: none;
+        z-index: 1;
+    }
+
+    .btn-select {
+        width: 100%;
+        min-height: 62px;
+        font-size: 1.08rem;
+        border-radius: 18px;
+        margin: 8px 0;
+    }
+
+    .font-size-controls {
+        position: static !important;     /* แก้ปุ่ม ก ก+ ก++ บังหน้า */
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+        background: transparent;
+        box-shadow: none;
+        z-index: 1;
+    }
+
+    .btn-accessibility {
+        width: 100%;
+        min-height: 58px;
+        font-size: 1.1rem;
+        border-radius: 18px;
+    }
+
+    /* ลดความสูงช่วงแรกของหน้า */
+    .hero {
+        padding-top: 24px !important;
+    }
+}
+
+/* จอเล็กมาก ให้เมนูเรียง 1 ปุ่มต่อแถวเพื่อไม่เบียด */
+@media (max-width: 390px) {
+    .nav-links {
+        grid-template-columns: 1fr;
+    }
+}
