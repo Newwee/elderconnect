@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElderConnect - ใช้งานง่ายสำหรับผู้สูงอายุ</title>
+    <meta name="description" content="ElderConnect เวอร์ชันอ่านง่าย ปุ่มใหญ่ สีชัด และเหมาะกับผู้สูงอายุ">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <a class="skip-link" href="#board-news-section">ข้ามไปยังเนื้อหาหลัก</a>
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Logo.jpg" alt="ElderConnect Logo" class="brand-logo-img"> 
+            ElderConnect
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">หน้าแรก</a></li>
+            <li><a href="#board-news-section">📢 ข่าวสาร</a></li>
+            <li><a href="#social-section">📍 หาเพื่อนคุย</a></li>
+            <li><a href="#health-section">🏥 ยาและสุขภาพ</a></li>
+            <li><a href="#memory-section">🎮 เกมฝึกความจำ</a></li>
+            <li><a href="#ai-section">🤖 เพื่อนคุย</a></li>
+            <li><a href="#caregivers-section">🤝 เพื่อนพาเที่ยว</a></li>
+        </ul>
+        <div class="nav-actions">
+            <select id="vision-mode-select" class="btn-select" title="ปรับสีหน้าจอให้อ่านง่าย" aria-label="ปรับสีหน้าจอ">
+                <option value="normal">☀️ สว่างชัดเจน</option>
+                <option value="dark">🌙 โหมดมืด</option>
+                <option value="eyecare">🍵 สีอุ่นถนอมตา</option>
+                <option value="protanopia">🔴 ตาบอดสีแดง</option>
+                <option value="deuteranopia">🟢 ตาบอดสีเขียว</option>
+                <option value="tritanopia">🔵 ตาบอดสีน้ำเงิน</option>
+            </select>
+            <div class="font-size-controls" aria-label="ปรับขนาดตัวอักษร">
+                <button type="button" id="font-normal-btn" class="btn-accessibility">ก</button>
+                <button type="button" id="font-large-btn" class="btn-accessibility">ก+</button>
+                <button type="button" id="font-xlarge-btn" class="btn-accessibility">ก++</button>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content">
+            <div class="badge">Elder Connect</div>
+            <h1 class="brand-title">เชื่อมต่อ <span>ใส่ใจ</span></h1>
+            <h2>แพลตฟอร์มคู่ใจสำหรับผู้สูงอายุ อ่านง่าย กดง่าย และปลอดภัยขึ้น</h2>
+            <p>ช่วยเตือนยา หาเพื่อนคุย เล่นเกมฝึกความจำ และเชื่อมต่อครอบครัวในหน้าเดียว</p>
+            <div class="hero-buttons">
+                <a href="#board-news-section" class="btn-primary">👇 เริ่มทดลองใช้งาน</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="Logo.jpg" alt="ElderConnect Logo Banner">
+        </div>
+    </header>
+
+    <section id="board-news-section" class="elder-section-block">
+        <div class="category-banner-card card-color-feed">
+            <div class="banner-image-side">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop" alt="กิจกรรมรวมกลุ่มผู้สูงอายุ">
+            </div>
+            <div class="banner-text-side">
+                <span class="section-tag">หมวดหมู่ที่ 1</span>
+                <h3>📢 บอร์ดข่าวสารกิจกรรม & นัดรวมกลุ่มแก้เหงา</h3>
+                <p>ศูนย์รวมกิจกรรมนัดหมายในชีวิตจริง เช่น การรวมกลุ่มทำกิจกรรมรำไม้พลอง สวดมนต์ หรือพบปะพูดคุย และเป็นพื้นที่คัดแยกโซนฟีดข้อมูลเฉพาะทางอ่านง่าย</p>
+            </div>
+        </div>
+
+        <div class="elder-functional-content">
+            <div class="feed-zone-tabs-container">
+                <button class="feed-zone-main-btn active" id="feed-btn-all" onclick="filterFeeds('all')">🌟 ฟีดรวมมิตรทั้งหมด</button>
+                <button class="feed-zone-main-btn" id="feed-btn-health" onclick="filterFeeds('health')">🏥 โซนประกาศแอปหมอ</button>
+                <button class="feed-zone-main-btn" id="feed-btn-memory" onclick="filterFeeds('memory')">🎞️ โซนแชร์ความทรงจำอดีต</button>
+                <button class="feed-zone-main-btn" id="feed-btn-life" onclick="filterFeeds('life')">💬 โซนปรึกษาปัญหาชีวิต</button>
+            </div>
+
+            <div id="feed-list-display" class="feed-cards-stack-flow">
+            </div>
+        </div>
+    </section>
+
+    <section id="social-section" class="elder-section-block bg-alternate-gray">
+        <div class="category-banner-card card-color-social">
+            <div class="banner-image-side">
+                <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?q=80&w=600&auto=format&fit=crop" alt="ชวนคุยในสวนสาธารณะ">
+            </div>
+            <div class="banner-text-side">
+                <span class="section-tag">หมวดหมู่ที่ 2</span>
+                <h3>📍 ปุ่มชวนคุย (Check-in พื้นที่ความสุขเพื่อทลายความเหงา)</h3>
+                <p>เชื่อมต่อผ่านกิจกรรมเล็กๆ แก้ปัญหาการอยู่ใกล้กันแต่ไม่รู้จักกันในเมืองใหญ่ หากไปนั่งเล่นที่สวนสาธารณะ ระบบจะช่วยหาคนที่มีงานอดิเรกตรงกันในรัศมีรอบตัวท่านค่ะ</p>
+            </div>
+        </div>
+
+        <div class="elder-functional-content max-width-form-box">
+            <div class="elder-action-post-card">
+                <div class="form-group-giant">
+                    <label>👤 ระบุชื่อเล่นหรือนามสมมติของคุณตา/คุณยาย:</label>
+                    <input type="text" id="checkin-name" value="คุณยายสมพร" class="elder-input-field">
+                </div>
+                <div class="form-group-giant">
+                    <label>🎨 เลือกงานอดิเรกหรืองานสมาธิที่ท่านอยากชวนเพื่อนคุยวันนี้:</label>
+                    <select id="checkin-hobby" class="elder-input-field select-box-styled">
+                        <option value="ปลูกต้นไม้/ทำสวน">🌿 เรื่องการปลูกต้นไม้ จัดสวน และเพาะชำกล้าไม้</option>
+                        <option value="ทำอาหาร/ขนมไทย">🍳 เรื่องสูตรอาหารดั้งเดิมและการทำขนมไทยโบราณ</option>
+                        <option value="ฟังธรรมะ/สวดมนต์">🙏 เรื่องการฟังธรรมะ ไปทำบุญไหว้พระ และสวดมนต์</option>
+                        <option value="ออกกำลังกายเบาๆ">🏃 การเดินออกกำลังกายรับลม สลับนั่งคุยพักผ่อนรอบสระน้ำ</option>
+                    </select>
+                </div>
+                <button class="btn-giant-trigger-checkin" onclick="performElderCheckin()">🔴 กดปุ่มเช็คอินเพื่อเปิดสัญญาณค้นหาเพื่อนรอบข้าง</button>
+            </div>
+            <div id="checkin-api-result" class="margin-top"></div>
+        </div>
+    </section>
+
+    <div id="nearby-chat-modal" class="game-popup-overlay-modal game-hidden" style="z-index: 10000;">
+        <div class="elder-premium-chat-viewport nearby-chat-viewport" role="dialog" aria-modal="true" aria-labelledby="nearby-chat-title">
+            <div class="nearby-chat-header">
+                <div>
+                    <h4 id="nearby-chat-title">กำลังแชท...</h4>
+                    <p id="nearby-chat-subtitle">กดทิปชวนคุยด้านล่างเพื่อเริ่มบทสนทนาได้ง่าย ๆ</p>
+                </div>
+                <button type="button" onclick="closeNearbyChat()" class="modal-close-elder" aria-label="ปิดหน้าต่างแชท">&times;</button>
+            </div>
+            <div id="nearby-chat-box" class="chat-message-rows-flow nearby-chat-box" aria-live="polite"></div>
+            <div class="conversation-tips-panel" aria-label="ทิปชวนคุย">
+                <div class="tips-panel-title">💡 ทิปชวนคุย กดแล้วข้อความจะไปอยู่ช่องพิมพ์</div>
+                <div id="nearby-chat-tips" class="conversation-tip-grid"></div>
+            </div>
+            <div class="chat-input-bottom-bar-dock nearby-chat-input-bar">
+                <input type="text" id="nearby-chat-input" placeholder="พิมพ์ข้อความทักทาย หรือกดทิปด้านบน..." class="elder-input-field" autocomplete="off">
+                <button type="button" class="btn-submit-post-elder" onclick="sendNearbyMessage()">ส่ง 💬</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="health-section" class="elder-section-block">
+        <div class="category-banner-card card-color-health">
+            <div class="banner-image-side">
+                <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600&auto=format&fit=crop" alt="ตรวจวัดสุขภาพประจำวัน">
+            </div>
+            <div class="banner-text-side">
+                <span class="section-tag">หมวดหมู่ที่ 3</span>
+                <h3>🏥 สมุดบันทึกแจ้งเตือนกินยา & ข้อมูลนาฬิกาข้อมือ</h3>
+                <p>ดูแลครบวงจรด้วยเทคโนโลยีที่เข้าใจง่าย เชื่อมต่อข้อมูลชีพจร Smartwatch อัตโนมัติ และมีปุ่มกดยืนยันกินยาเพื่อส่งสัญญานแจ้งเตือนให้ลูกหลานสบายใจผ่านไลน์</p>
+            </div>
+        </div>
+
+        <div class="elder-functional-content">
+            <div class="health-grid-cards-split">
+                <div class="health-block-item-card">
+                    <h5>⌚ ข้อมูลสุขภาพสัญญาณชีพจากนาฬิกาข้อมือ</h5>
+                    <div id="wearable-metrics-box" class="elder-premium-data-display">
+                        กำลังอ่านสัญญาณชีพจรของท่าน...
+                    </div>
+                    <button class="btn-submit-post-elder" style="margin-top: 15px; width: 100%;" onclick="refreshWearableData()">🔄 กดปุ่มเพื่ออัปเดตค่านาฬิกาล่าสุด</button>
+                </div>
+                <div class="health-block-item-card emergency-shake-card">
+                    <h5>🚨 ระบบเฝ้าระวังอุบัติเหตุฉุกเฉิน (ตรวจจับสัญญาณการล้ม)</h5>
+                    <p style="font-size: 1.15rem; color: var(--text-main); margin-bottom: 15px;">เมื่อคุณตาคุณยายเกิดอุบัติเหตุลื่นล้ม สมาร์ทวอทช์จะส่งข้อมูลระบุพิกัดเตือนภัยเข้ามือถือครอบครัวทันที สามารถกดปุ่มด้านล่างเพื่อทดสอบระบบจำลองสั่นแจ้งเตือนได้ค่ะ</p>
+                    <button class="btn-trigger-fall-emergency" onclick="triggerFallSimulation()">🚨 ทดสอบจำลองเหตุการณ์ลื่นล้ม (หน้าจอจะสั่น)</button>
+                </div>
+            </div>
+
+            <div class="medicine-schedule-container-block">
+                <h4 style="font-size: 1.4rem; color: #D63031; margin-bottom: 20px;"><i class="fa-solid fa-pills"></i> รายการแจ้งเตือนยาที่คุณตาคุณยายต้องทานในวันนี้:</h4>
+                <div id="medicine-api-list" class="medicine-rows-flow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="memory-section" class="elder-section-block bg-alternate-gray">
+        <div class="category-banner-card card-color-game">
+            <div class="banner-image-side">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=600&auto=format&fit=crop" alt="เกมฝึกสมองเพื่อผู้สูงอายุ">
+            </div>
+            <div class="banner-text-side">
+                <span class="section-tag">หมวดหมู่ที่ 4</span>
+                <h3>🎮 กิจกรรมภารกิจต่างวัย มินิเกมจับคู่ผักผลไม้ & เล่าความหลัง</h3>
+                <p>พื้นที่ส่วนตัว (Memory Lane) สำหรับกดบันทึกเสียงเล่าเรื่องราวความรู้ในอดีตแปลงเป็นข้อความ และมินิเกมกระตุ้นความจำแสนสนุกที่สามารถชวนลูกหลานมาเล่นร่วมกันได้</p>
+            </div>
+        </div>
+
+        <div class="elder-functional-content">
+            <div class="memory-grid-sections-split">
+                <div class="memory-standalone-card-unit">
+                    <h5>🎙️ อัลบั้มบันทึกเล่าความหลังด้วยเสียง (Storytelling)</h5>
+                    <p style="font-size:1.15rem; color:var(--text-muted); margin-bottom:15px;">คุณตาคุณยายอยากบันทึกประวัติศาสตร์ชีวิตเรื่องไหน สามารถกดปุ่มไมโครโฟนยักษ์แล้วเริ่มต้นพูดคุยได้เลยค่ะ ระบบคอมพิวเตอร์หลังบ้านจะคอยสลับแปลงเสียงกลายเป็นตัวอักษรให้ทันที</p>
+                    <button class="btn-giant-microphone-trigger" onclick="recordElderStoryVoice()"><i class="fa-solid fa-microphone"></i> 🎤 กดปุ่มนี้แล้วเริ่มส่งเสียงพูดเล่าเรื่องราวอดีต</button>
+                    <div id="voice-conversion-result" class="margin-top"></div>
+                </div>
+
+                <div class="memory-standalone-card-unit">
+                    <h5>🥦 เกมจับคู่ผักและผลไม้ฝึกระบบประสาทความจำ 🍎</h5>
+                    <p style="font-size:1.1rem; color:var(--text-muted); margin-bottom:15px;">มินิเกมช่วยชะลอความเสื่อมของความจำ ชวนบุตรหลานกดยกแผ่นป้ายสลับหาคู่เหมือนผักผลไม้เพื่อสุขภาพแสนสนุก</p>
+                    
+                    <div class="game-engine-wrapper-block">
+                        <div class="game-live-status-metrics">
+                            <div class="metric-pill"><span>คะแนนปัจจุบัน</span><strong id="game-score">0</strong></div>
+                            <div class="metric-pill"><span>เปิดป้ายไปแล้ว</span><strong id="game-moves">0</strong></div>
+                            <div class="metric-pill"><span>เวลาที่ใช้</span><strong id="game-timer">00:00</strong></div>
+                        </div>
+
+                        <div class="game-toolbar-controls">
+                            <select id="game-difficultySelect" class="elder-input-field select-box-styled" style="width: auto; padding:8px 15px; font-weight:bold;">
+                                <option value="beginner" selected>🌱 ง่ายมาก (ป้าย 3×2)</option>
+                                <option value="easy">🌿 ง่าย (ป้าย 4×3)</option>
+                                <option value="medium">🍎 ปานกลาง (ป้าย 4×4)</option>
+                            </select>
+                            <button id="game-newGameBtn" class="btn-submit-post-elder" style="padding: 10px 22px;">🎮 สั่งเริ่มกระดานเกมใหม่</button>
+                        </div>
+
+                        <div id="game-message" class="game-message-box" role="status" aria-live="polite">กดเปิดป้ายรูปภาพทีละ 2 ใบ เพื่อหาคู่ที่เหมือนกันค่ะ</div>
+
+                        <div class="game-grid-render-anchor">
+                            <div id="game-board" class="game-board-flexible-layout"></div>
+                        </div>
+
+                        <div id="game-winModal" class="game-popup-overlay-modal game-hidden">
+                            <div class="game-modal-body-content">
+                                <div class="modal-celebration-icon">🎉</div>
+                                <h3 style="font-size:1.7rem; margin-bottom:10px;">คุณตาคุณยายเก่งมากๆ เลยค่ะ!</h3>
+                                <p style="font-size:1.1rem; color:var(--text-muted); margin-bottom:20px;">สมาธิยอดเยี่ยม จับคู่ภาพผักผลไม้เพื่อสุขภาพครบทุกแผ่นป้ายแล้ว</p>
+                                <div class="modal-score-summary-flex">
+                                    <div class="summary-badge-item"><span>ยอดคะแนน</span><strong id="game-finalScore">0</strong></div>
+                                    <div class="summary-badge-item"><span>จำนวนเปิด</span><strong id="game-finalMoves">0</strong></div>
+                                    <div class="summary-badge-item"><span>เวลาสุทธิ</span><strong id="game-finalTime">0</strong></div>
+                                </div>
+                                <button id="game-playAgainBtn" class="btn-submit-post-elder" style="width:100%; padding:15px; font-size:1.2rem;">🔄 กดเปิดกระดานเล่นใหม่อีกรอบ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-section" class="elder-section-block">
+        <div class="category-banner-card card-color-ai">
+            <div class="banner-image-side">
+                <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=600&auto=format&fit=crop" alt="AI เพื่อนคุยคลายเหงา">
+            </div>
+            <div class="banner-text-side">
+                <span class="section-tag">หมวดหมู่ที่ 5</span>
+                <h3>🤖 ระบบปัญญาประดิษฐ์ AI-Companion (ผู้ฟังที่ตั้งใจ)</h3>
+                <p>หากไม่มีสมาชิกคนไหนในบ้านว่างพูดคุย เรามีระบบปัญญาประดิษฐ์อัจฉริยะที่คอยทำหน้าที่เป็นเพื่อนคู่คิด พร้อมเปิดรับฟังทุกเรื่องราวความทรงจำ สรุปคำแนะนำสุขภาวะ และคุยโต้ตอบเป็นห่วงเป็นใยตลอด 24 ชั่วโมงค่ะ</p>
+            </div>
+        </div>
+
+        <div class="elder-functional-content max-width-form-box">
+            <div class="elder-premium-chat-viewport">
+                <div id="chat-box-display" class="chat-message-rows-flow">
+                    <div class="chat-bubble-msg bot-type"><b>🤖 บอทใจดีประจำแอป:</b> สวัสดีค่ะคุณตาคุณยาย วันนี้ทานข้าวเย็นอร่อยไหมครับ สุขภาพร่างกายแข็งแรงปกติดีไหมเอ่ย มีเรื่องไม่สบายใจหรืออยากเล่าความหลังเรื่องไหนพิมพ์คุยกับผมได้เลยนะครับ ผมรอฟังอยู่เสมอครับ 💚</div>
+                </div>
+                <div class="chat-input-bottom-bar-dock">
+                    <input type="text" id="chat-user-input-field" placeholder="พิมพ์คุยกับเพื่อนใจดีตรงนี้..." class="elder-input-field" autocomplete="off">
+                    <button class="btn-submit-post-elder" onclick="sendMessageToAICompanion()" style="padding: 0 35px; font-size: 1.15rem; white-space: nowrap;">ส่งคำพูด 💬</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="caregivers-section" class="elder-section-block bg-alternate-gray">
+        <div class="category-banner-card card-color-care">
+            <div class="banner-image-side">
+                <img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?q=80&w=600&auto=format&fit=crop" alt="บริการพาผู้สูงอายุเดินเที่ยว">
+            </div>
+            <div class="banner-text-side">
+                <span class="section-tag">หมวดหมู่ที่ 6</span>
+                <h3>🤝 โซนแหล่งรวมบริการเพื่อนร่วมเดินทางพาเดินเล่นเที่ยวทำกิจกรรม</h3>
+                <p>โมดูลโซนสร้างรายได้เสริมแก่ผู้ช่วยพาเดินเล่น โดยเขียนอธิบายประวัติเกี่ยวกับบุคลิกภาพนิสัยใจคอของตนเองชัดเจน เพื่อให้ผู้สูงอายุคัดเลือกจ้างงานจากความสมัครใจ พร้อมระบบโอนเงินทิปเพิ่มเติมผ่านเครือข่าย API หลังบ้านค่ะ</p>
+            </div>
+        </div>
+
+        <div class="elder-functional-content">
+            <div id="caregivers-api-cards-container" class="caregivers-vertical-stack-blocks">
+            </div>
+        </div>
+    </section>
+
+    <div id="tip-payment-modal" class="game-popup-overlay-modal game-hidden" style="z-index: 10001;">
+        <div class="tip-payment-card" role="dialog" aria-modal="true" aria-labelledby="tip-modal-title">
+            <div class="tip-payment-header">
+                <div>
+                    <h4 id="tip-modal-title">💝 ให้ทิปผู้ดูแล</h4>
+                    <p id="tip-modal-subtitle">เลือกจำนวนเงินด้วยปุ่มใหญ่ อ่านง่าย</p>
+                </div>
+                <button type="button" onclick="closeTipModal()" class="modal-close-elder" aria-label="ปิดหน้าต่างให้ทิป">&times;</button>
+            </div>
+            <div class="tip-recipient-box" id="tip-recipient-box">กำลังเลือกผู้ดูแล...</div>
+            <div class="tip-amount-grid" id="tip-amount-grid" aria-label="เลือกจำนวนทิป">
+                <button type="button" class="tip-amount-btn" data-amount="20">20 บาท</button>
+                <button type="button" class="tip-amount-btn" data-amount="50">50 บาท</button>
+                <button type="button" class="tip-amount-btn" data-amount="100">100 บาท</button>
+                <button type="button" class="tip-amount-btn" data-amount="200">200 บาท</button>
+            </div>
+            <label for="tip-custom-amount" class="tip-custom-label">หรือกรอกจำนวนเอง</label>
+            <input id="tip-custom-amount" class="elder-input-field" type="number" min="1" step="1" inputmode="numeric" placeholder="เช่น 30">
+            <label for="tip-note-input" class="tip-custom-label">ข้อความสั้น ๆ ถึงผู้ดูแล</label>
+            <input id="tip-note-input" class="elder-input-field" type="text" maxlength="120" placeholder="เช่น ขอบคุณที่ดูแลคุณแม่อย่างใจเย็น">
+            <div class="tip-confirm-summary" id="tip-confirm-summary">ยอดทิปที่เลือก: ยังไม่ได้เลือก</div>
+            <div class="tip-modal-actions">
+                <button type="button" class="btn-submit-post-elder btn-tip-confirm" onclick="confirmTipPayment()">ยืนยันให้ทิป 💝</button>
+                <button type="button" class="btn-submit-post-elder btn-tip-cancel" onclick="closeTipModal()">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h3><img src="Logo.jpg" alt="ElderConnect Logo Footer" class="brand-logo-img-footer"> ElderConnect</h3>
+                <p>เวอร์ชันอ่านง่าย ปุ่มใหญ่ สีชัด เหมาะกับผู้สูงอายุและครอบครัว</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ElderConnect Project. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
